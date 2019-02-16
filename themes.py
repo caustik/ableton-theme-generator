@@ -5,11 +5,9 @@
 # desc: generate ableton themes
 # 
 
-from lxml import html as Html
 from lxml import etree
 
-import multiprocessing, collections, contextlib, subprocess, threading, platform, requests, argparse, ctypes, psutil, math, time, json, sys, os, io, re
-import numpy as np
+import argparse, math
 import seaborn as sns
 import matplotlib.pyplot as plt
 

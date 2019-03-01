@@ -9,10 +9,11 @@ from lxml import etree
 
 # use svg backend to avoid pulling in tkinter, which doesn't work with pynsist
 import matplotlib
-matplotlib.use("svg")
+matplotlib.use("Qt5Agg")
 
 import argparse, math
 import seaborn as sns
+import matplotlib.pyplot as plt
 
 THEME_FILE_INP = "C:\\ProgramData\\Ableton\\Live 10 Suite\\Resources\\Themes\\00Light.ask"
 THEME_FILE_OUT = "C:\\ProgramData\\Ableton\\Live 10 Suite\\Resources\\Themes\\PG {}.ask"
@@ -72,7 +73,8 @@ class CommandLine:
                     R[sorted[i][1]].attrib["Value"] = str(int(r * 255))
                     G[sorted[i][1]].attrib["Value"] = str(int(g * 255))
                     B[sorted[i][1]].attrib["Value"] = str(int(b * 255))
-                #sns.palplot(colors)
+                #plot = sns.palplot(colors)
+                #plt.show()
             with open(THEME_FILE_OUT.format(theme["name"]), "wb") as output:
                 tree.write(output, pretty_print=True, xml_declaration=True, encoding='utf-8')
 

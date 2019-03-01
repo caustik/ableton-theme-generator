@@ -7,9 +7,12 @@
 
 from lxml import etree
 
+# use svg backend to avoid pulling in tkinter, which doesn't work with pynsist
+import matplotlib
+matplotlib.use("svg")
+
 import argparse, math
 import seaborn as sns
-import matplotlib.pyplot as plt
 
 THEME_FILE_INP = "C:\\ProgramData\\Ableton\\Live 10 Suite\\Resources\\Themes\\00Light.ask"
 THEME_FILE_OUT = "C:\\ProgramData\\Ableton\\Live 10 Suite\\Resources\\Themes\\PG {}.ask"
@@ -23,7 +26,6 @@ THEMES = [
     }
 ]
 
-#for name in plt.colormaps():
 for name in [ 'viridis', 'plasma', 'inferno', 'magma', 'cividis' 
             'Greys', 'Purples', 'Blues', 'Greens', 'Oranges', 'Reds', 'YlOrBr', 'YlOrRd', 'OrRd', 'PuRd', 'RdPu', 'BuPu', 'GnBu', 'PuBu', 'YlGnBu', 'PuBuGn', 'BuGn', 'YlGn' ]:
     try:
@@ -73,7 +75,9 @@ class CommandLine:
                 #sns.palplot(colors)
             with open(THEME_FILE_OUT.format(theme["name"]), "wb") as output:
                 tree.write(output, pretty_print=True, xml_declaration=True, encoding='utf-8')
-                #plt.savefig(theme["name"] + ".png", dpi=400)
+
+def main():
+    themes = CommandLine()
 
 if __name__ == "__main__":
-    themes = CommandLine()
+    main()
